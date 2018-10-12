@@ -1,0 +1,1190 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment04}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{itemize}
+\tightlist
+\item
+  Name : Joonyoung-Choi
+\item
+  Student ID: 20112096
+\item
+  Description: import k-means algorithm to MNIST test data set
+\item
+  github: \href{https://github.com/mydream757/Computer\_Vision}{https://github.com/mydream757/Computer\_Vision}
+\end{itemize}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Import liabraries and define class
+\end{enumerate}
+
+    \begin{itemize}
+\tightlist
+\item
+  import needed libraries and define the global variables
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{size\PYZus{}row} \PY{o}{=} \PY{l+m+mi}{28}
+        \PY{n}{size\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{28}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}normalize data}
+        \PY{k}{def} \PY{n+nf}{normalize}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{n}{normalized} \PY{o}{=} \PY{p}{(}\PY{n}{data} \PY{o}{\PYZhy{}} \PY{n+nb}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{normalized}
+        
+        \PY{c+c1}{\PYZsh{}calculate distance}
+        \PY{k}{def} \PY{n+nf}{distance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{n}{d} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  choose initial centroids from given data set.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}get initial centroids from data set}
+        \PY{k}{def} \PY{n+nf}{chooseCentroid}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}label}\PY{p}{,}\PY{n}{numOfk}\PY{p}{)}\PY{p}{:}
+            \PY{n}{list\PYZus{}centroid} \PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row}\PY{o}{*}\PY{n}{size\PYZus{}col}\PY{p}{,} \PY{n}{numOfk}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{n}{list\PYZus{}centroidLabel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{numOfk}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+        
+            \PY{n}{rand\PYZus{}num} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}label}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{numOfk}\PY{p}{)}\PY{p}{:}
+                \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{p}{)}
+                \PY{k}{while} \PY{n}{list\PYZus{}label}\PY{p}{[}\PY{n}{rand\PYZus{}num}\PY{p}{]} \PY{o+ow}{in} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{:}
+                    \PY{n}{rand\PYZus{}num} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}label}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{list\PYZus{}label}\PY{p}{[}\PY{n}{rand\PYZus{}num}\PY{p}{]}
+                \PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{rand\PYZus{}num}\PY{p}{]}
+        
+            \PY{k}{return} \PY{p}{[}\PY{n}{list\PYZus{}centroid}\PY{p}{,} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  compute accuaracy when k = 10.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}when k=10, compute accuracy}
+         \PY{k}{def} \PY{n+nf}{computeAccuracy}\PY{p}{(}\PY{n}{list\PYZus{}label}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{:}
+             \PY{n}{num} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}label}\PY{p}{)}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0} 
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{list\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{==}\PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         
+             \PY{n}{accuracy} \PY{o}{=} \PY{p}{(}\PY{n}{count}\PY{o}{/}\PY{n}{num}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+             \PY{k}{return} \PY{n}{accuracy}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  compute energy per iteration.
+  \(E = \sum_{k=1}^{K} \sum_{n=1}^{N}r_{nk}\Vert{X_n}-{c_k}\Vert^2\)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{computeEnergy}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,} \PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{:}
+            \PY{n}{energy} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{energy} \PY{o}{+}\PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{energy}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  change label on images's label list.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{assignLabel}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{result} \PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{tmp} \PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{result} \PY{o}{\PYZgt{}} \PY{n}{tmp}\PY{p}{:}
+                        \PY{n}{result} \PY{o}{=} \PY{n}{tmp}
+                        \PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  this is used for checking the loop condition
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{makeLabelList}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{list} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{list}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{k}{return} \PY{n+nb}{list}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  compute and return the centroids.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{computeCentroid}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{:}
+            \PY{n}{im\PYZus{}average}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row} \PY{o}{*} \PY{n}{size\PYZus{}col}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{n}{im\PYZus{}count}    \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{list\PYZus{}clabel}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{im\PYZus{}average}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{k}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}
+                        \PY{n}{im\PYZus{}count}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{im\PYZus{}average}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{n}{im\PYZus{}count}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+        
+            \PY{k}{return} \PY{n}{im\PYZus{}average}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  check the loop condition by label lists.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{conditionCheck}\PY{p}{(}\PY{n}{before\PYZus{}label}\PY{p}{,}\PY{n}{after\PYZus{}label}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{before\PYZus{}label}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{before\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{n}{after\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                    \PY{k}{return} \PY{k+kc}{True}
+            \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Main function of K-means algorithm.
+\end{enumerate}
+
+    \begin{itemize}
+\tightlist
+\item
+  this is the main function of k-means algorithm.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} start of k = 2, end of k = 10}
+         \PY{k}{def} \PY{n+nf}{k\PYZus{}means}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{}get data from .csv file}
+             \PY{n}{file\PYZus{}data} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mnist\PYZus{}test.csv}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{handle\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file\PYZus{}data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{handle\PYZus{}file}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+             \PY{n}{num\PYZus{}image} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+             \PY{n}{handle\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}generate lists of image and (true) labels}
+             \PY{n}{list\PYZus{}image}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row} \PY{o}{*} \PY{n}{size\PYZus{}col}\PY{p}{,} \PY{n}{num\PYZus{}image}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+             \PY{n}{list\PYZus{}label}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{num\PYZus{}image}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} split data into list}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{n}{line\PYZus{}data} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{label} \PY{o}{=} \PY{n}{line\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{im\PYZus{}vector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asfarray}\PY{p}{(}\PY{n}{line\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{im\PYZus{}vector} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{im\PYZus{}vector}\PY{p}{)}
+         
+                 \PY{n}{list\PYZus{}label}\PY{p}{[}\PY{n}{count}\PY{p}{]} \PY{o}{=} \PY{n}{label}
+                 \PY{n}{list\PYZus{}image}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{count}\PY{p}{]} \PY{o}{=} \PY{n}{im\PYZus{}vector}
+                 \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{c+c1}{\PYZsh{}generate list of centroid (clustering)label}
+             \PY{n}{list\PYZus{}clabel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{num\PYZus{}image}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}choose initial centroids and generate centroid label list}
+             \PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel} \PY{o}{=} \PY{n}{chooseCentroid}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}label}\PY{p}{,}\PY{n}{k}\PY{p}{)}  
+             
+             \PY{c+c1}{\PYZsh{}initial centroids show}
+             \PY{n}{f1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{label}       \PY{o}{=} \PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 \PY{n}{im\PYZus{}vector}   \PY{o}{=} \PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}
+                 \PY{n}{im\PYZus{}matrix}   \PY{o}{=} \PY{n}{im\PYZus{}vector}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row}\PY{p}{,} \PY{n}{size\PYZus{}col}\PY{p}{)}\PY{p}{)}   
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}       
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{label}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}matrix}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+         
+                 \PY{n}{frame}   \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}             
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{get\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}get label list for condition check}
+             \PY{n}{before} \PY{o}{=} \PY{n}{makeLabelList}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}assign labels}
+             \PY{n}{assignLabel}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}get label list for condition check}
+             \PY{n}{after} \PY{o}{=} \PY{n}{makeLabelList}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}
+             
+             \PY{n}{iterCount} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{c+c1}{\PYZsh{}if before list and after list is same, stop loop}
+             \PY{k}{while} \PY{n}{conditionCheck}\PY{p}{(}\PY{n}{before}\PY{p}{,}\PY{n}{after}\PY{p}{)}\PY{o}{==}\PY{k+kc}{True} \PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}update before list}
+                 \PY{n}{before} \PY{o}{=} \PY{n}{after}
+                 \PY{c+c1}{\PYZsh{}compute new centroids from changed labels}
+                 \PY{n}{list\PYZus{}centroid} \PY{o}{=} \PY{n}{computeCentroid}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}by the new centroids, change the labels}
+                 \PY{n}{assignLabel}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}
+                 \PY{n}{after} \PY{o}{=} \PY{n}{makeLabelList}\PY{p}{(}\PY{n}{list\PYZus{}clabel}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}compute energy at this iteration}
+                 \PY{n}{energy} \PY{o}{=} \PY{n}{computeEnergy}\PY{p}{(}\PY{n}{list\PYZus{}image}\PY{p}{,} \PY{n}{list\PYZus{}centroid}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{,}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}
+                 \PY{n}{iterCount} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iter: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{iterCount}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ \PYZam{} Energy: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{energy}\PY{p}{)}
+         
+             \PY{n}{im\PYZus{}average}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row} \PY{o}{*} \PY{n}{size\PYZus{}col}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+             \PY{n}{im\PYZus{}count}    \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+         
+             \PY{n}{f2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{list\PYZus{}centroidLabel}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{list\PYZus{}centroid}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{size\PYZus{}row}\PY{p}{,} \PY{n}{size\PYZus{}col}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{frame}   \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{get\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}if k=10, compute accuracy and show}
+             \PY{k}{if} \PY{n}{k}\PY{o}{==}\PY{l+m+mi}{10}\PY{p}{:}
+                 \PY{n}{accuracy} \PY{o}{=} \PY{n}{computeAccuracy}\PY{p}{(}\PY{n}{list\PYZus{}label}\PY{p}{,}\PY{n}{list\PYZus{}clabel}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{accuracy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Results
+\end{enumerate}
+
+    This program doesn't make centroids. this just choose random units from
+data set.
+
+    \begin{itemize}
+\tightlist
+\item
+  the start of k is '2'
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  498803.87242124154
+Iter:  2  \& Energy:  495760.2432725557
+Iter:  3  \& Energy:  494454.45303971885
+Iter:  4  \& Energy:  493809.8769836099
+Iter:  5  \& Energy:  493432.1199801324
+Iter:  6  \& Energy:  493241.46199379634
+Iter:  7  \& Energy:  493153.3454539614
+Iter:  8  \& Energy:  493121.1677338114
+Iter:  9  \& Energy:  493113.5369395657
+Iter:  10  \& Energy:  493108.2841998108
+Iter:  11  \& Energy:  493104.95829513005
+Iter:  12  \& Energy:  493103.94312557427
+Iter:  13  \& Energy:  493103.5465340409
+Iter:  14  \& Energy:  493103.2746975684
+Iter:  15  \& Energy:  493103.21124978334
+Iter:  16  \& Energy:  493103.18680798414
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The result is hard to recognize.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  485780.63758017117
+Iter:  2  \& Energy:  476037.1417951543
+Iter:  3  \& Energy:  472984.177666077
+Iter:  4  \& Energy:  472183.1075374662
+Iter:  5  \& Energy:  472023.83686686074
+Iter:  6  \& Energy:  471981.32366304693
+Iter:  7  \& Energy:  471968.27806577255
+Iter:  8  \& Energy:  471960.35407858784
+Iter:  9  \& Energy:  471952.9335702368
+Iter:  10  \& Energy:  471949.8696635349
+Iter:  11  \& Energy:  471948.8386487071
+Iter:  12  \& Energy:  471947.76788445236
+Iter:  13  \& Energy:  471946.37670752616
+Iter:  14  \& Energy:  471945.2041845023
+Iter:  15  \& Energy:  471944.7417612958
+Iter:  16  \& Energy:  471944.58707147324
+Iter:  17  \& Energy:  471944.2223717432
+Iter:  18  \& Energy:  471943.8715299087
+Iter:  19  \& Energy:  471943.73988533195
+Iter:  20  \& Energy:  471943.6994516185
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  481727.8392561482
+Iter:  2  \& Energy:  474239.33441937383
+Iter:  3  \& Energy:  469770.02642840584
+Iter:  4  \& Energy:  465593.0518069285
+Iter:  5  \& Energy:  461437.2003824289
+Iter:  6  \& Energy:  458400.50692892005
+Iter:  7  \& Energy:  456892.09847017436
+Iter:  8  \& Energy:  456129.94845004234
+Iter:  9  \& Energy:  455743.3761687409
+Iter:  10  \& Energy:  455539.64769744856
+Iter:  11  \& Energy:  455402.4680453792
+Iter:  12  \& Energy:  455317.279036559
+Iter:  13  \& Energy:  455252.1844353519
+Iter:  14  \& Energy:  455190.10174534033
+Iter:  15  \& Energy:  455118.8722669243
+Iter:  16  \& Energy:  455056.521989718
+Iter:  17  \& Energy:  454972.8694049361
+Iter:  18  \& Energy:  454888.629373247
+Iter:  19  \& Energy:  454759.9746287354
+Iter:  20  \& Energy:  454615.2415386454
+Iter:  21  \& Energy:  454406.7186908886
+Iter:  22  \& Energy:  454114.5546604468
+Iter:  23  \& Energy:  453764.08640630497
+Iter:  24  \& Energy:  453302.305393386
+Iter:  25  \& Energy:  452838.9025268404
+Iter:  26  \& Energy:  452357.8637899243
+Iter:  27  \& Energy:  451864.7798693255
+Iter:  28  \& Energy:  451264.7453440553
+Iter:  29  \& Energy:  450548.9513122416
+Iter:  30  \& Energy:  449909.2743073259
+Iter:  31  \& Energy:  449522.1814886338
+Iter:  32  \& Energy:  449239.49553563434
+Iter:  33  \& Energy:  449005.70455337357
+Iter:  34  \& Energy:  448817.71661245625
+Iter:  35  \& Energy:  448683.3967577466
+Iter:  36  \& Energy:  448564.75311446434
+Iter:  37  \& Energy:  448468.6774593563
+Iter:  38  \& Energy:  448382.5698384887
+Iter:  39  \& Energy:  448307.70841899863
+Iter:  40  \& Energy:  448269.64632189117
+Iter:  41  \& Energy:  448253.08645943354
+Iter:  42  \& Energy:  448245.0618997325
+Iter:  43  \& Energy:  448240.4251388208
+Iter:  44  \& Energy:  448236.15298169485
+Iter:  45  \& Energy:  448233.3459005238
+Iter:  46  \& Energy:  448232.1049640369
+Iter:  47  \& Energy:  448231.2190989348
+Iter:  48  \& Energy:  448230.8212532189
+Iter:  49  \& Energy:  448230.42017002124
+Iter:  50  \& Energy:  448230.35746381065
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  453197.66078474117
+Iter:  2  \& Energy:  446265.7194169439
+Iter:  3  \& Energy:  444230.9073569672
+Iter:  4  \& Energy:  442612.07622038363
+Iter:  5  \& Energy:  440964.1153880761
+Iter:  6  \& Energy:  439470.88211030595
+Iter:  7  \& Energy:  438225.63015757146
+Iter:  8  \& Energy:  437337.75816643296
+Iter:  9  \& Energy:  436688.71033597447
+Iter:  10  \& Energy:  436159.9052618775
+Iter:  11  \& Energy:  435641.5394147954
+Iter:  12  \& Energy:  435117.39681533613
+Iter:  13  \& Energy:  434554.3283538235
+Iter:  14  \& Energy:  433944.0730698408
+Iter:  15  \& Energy:  433405.9377133465
+Iter:  16  \& Energy:  432954.21529475506
+Iter:  17  \& Energy:  432657.05978515156
+Iter:  18  \& Energy:  432466.818635154
+Iter:  19  \& Energy:  432355.9924399566
+Iter:  20  \& Energy:  432314.2142752114
+Iter:  21  \& Energy:  432299.2821100238
+Iter:  22  \& Energy:  432289.73754276754
+Iter:  23  \& Energy:  432286.6908574218
+Iter:  24  \& Energy:  432284.78904103744
+Iter:  25  \& Energy:  432284.0118664811
+Iter:  26  \& Energy:  432283.78224865976
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Although k is much bigger than k=2, stil we can't tell that is good
+clustering.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  431379.0122974147
+Iter:  2  \& Energy:  425618.6185393748
+Iter:  3  \& Energy:  424244.89724548993
+Iter:  4  \& Energy:  423752.48981145857
+Iter:  5  \& Energy:  423517.8109436064
+Iter:  6  \& Energy:  423355.26348031557
+Iter:  7  \& Energy:  423227.30034251814
+Iter:  8  \& Energy:  423139.8804074069
+Iter:  9  \& Energy:  423063.47435879736
+Iter:  10  \& Energy:  422984.41465285065
+Iter:  11  \& Energy:  422908.5174731895
+Iter:  12  \& Energy:  422848.50616584916
+Iter:  13  \& Energy:  422812.73647642514
+Iter:  14  \& Energy:  422774.52731582266
+Iter:  15  \& Energy:  422730.7907967787
+Iter:  16  \& Energy:  422687.99748942856
+Iter:  17  \& Energy:  422644.32777261286
+Iter:  18  \& Energy:  422591.2258305145
+Iter:  19  \& Energy:  422526.80158147076
+Iter:  20  \& Energy:  422441.04449438327
+Iter:  21  \& Energy:  422344.102608684
+Iter:  22  \& Energy:  422234.5377569585
+Iter:  23  \& Energy:  422089.3211384859
+Iter:  24  \& Energy:  421897.5099984761
+Iter:  25  \& Energy:  421676.31428844994
+Iter:  26  \& Energy:  421467.23002460133
+Iter:  27  \& Energy:  421263.1078435813
+Iter:  28  \& Energy:  421084.4608453833
+Iter:  29  \& Energy:  420881.58198872505
+Iter:  30  \& Energy:  420718.8714659764
+Iter:  31  \& Energy:  420589.63486175856
+Iter:  32  \& Energy:  420485.65652524825
+Iter:  33  \& Energy:  420414.398049958
+Iter:  34  \& Energy:  420373.32669203944
+Iter:  35  \& Energy:  420347.41632441845
+Iter:  36  \& Energy:  420329.8558256299
+Iter:  37  \& Energy:  420311.16893904214
+Iter:  38  \& Energy:  420289.9765509849
+Iter:  39  \& Energy:  420260.00371501624
+Iter:  40  \& Energy:  420239.8340217912
+Iter:  41  \& Energy:  420232.53758871206
+Iter:  42  \& Energy:  420226.88355067367
+Iter:  43  \& Energy:  420219.02250626514
+Iter:  44  \& Energy:  420207.9090639535
+Iter:  45  \& Energy:  420200.03531349363
+Iter:  46  \& Energy:  420197.91582974955
+Iter:  47  \& Energy:  420196.98615320446
+Iter:  48  \& Energy:  420195.9330326874
+Iter:  49  \& Energy:  420194.5656519569
+Iter:  50  \& Energy:  420193.65143438417
+Iter:  51  \& Energy:  420192.8091382402
+Iter:  52  \& Energy:  420192.1164325567
+Iter:  53  \& Energy:  420191.2939235608
+Iter:  54  \& Energy:  420190.4834683685
+Iter:  55  \& Energy:  420190.30117701634
+Iter:  56  \& Energy:  420190.22504515736
+Iter:  57  \& Energy:  420190.1852396935
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  441369.4732066819
+Iter:  2  \& Energy:  430590.95385029045
+Iter:  3  \& Energy:  426530.03753264964
+Iter:  4  \& Energy:  422787.3988567071
+Iter:  5  \& Energy:  419595.959160055
+Iter:  6  \& Energy:  418125.66564312205
+Iter:  7  \& Energy:  417519.337893581
+Iter:  8  \& Energy:  417034.1671827589
+Iter:  9  \& Energy:  416367.20244639757
+Iter:  10  \& Energy:  415390.3364617552
+Iter:  11  \& Energy:  413958.48226858664
+Iter:  12  \& Energy:  412729.41475541407
+Iter:  13  \& Energy:  412114.1458297913
+Iter:  14  \& Energy:  411776.4641795949
+Iter:  15  \& Energy:  411577.2932465257
+Iter:  16  \& Energy:  411466.02563373494
+Iter:  17  \& Energy:  411404.09125579963
+Iter:  18  \& Energy:  411366.4787701266
+Iter:  19  \& Energy:  411343.4035881605
+Iter:  20  \& Energy:  411318.1085922824
+Iter:  21  \& Energy:  411297.0132717604
+Iter:  22  \& Energy:  411282.90431939415
+Iter:  23  \& Energy:  411270.47103614983
+Iter:  24  \& Energy:  411259.43747556297
+Iter:  25  \& Energy:  411254.07458903955
+Iter:  26  \& Energy:  411249.0900103287
+Iter:  27  \& Energy:  411244.12060546735
+Iter:  28  \& Energy:  411242.03652042744
+Iter:  29  \& Energy:  411241.2111621121
+Iter:  30  \& Energy:  411241.05116966355
+Iter:  31  \& Energy:  411240.74154556467
+Iter:  32  \& Energy:  411240.5520004364
+Iter:  33  \& Energy:  411240.2922864607
+Iter:  34  \& Energy:  411240.0417442266
+Iter:  35  \& Energy:  411239.73474382557
+Iter:  36  \& Energy:  411239.3699139464
+Iter:  37  \& Energy:  411239.27923616953
+Iter:  38  \& Energy:  411238.9545820408
+Iter:  39  \& Energy:  411238.3717134266
+Iter:  40  \& Energy:  411237.87823344115
+Iter:  41  \& Energy:  411237.7279217084
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  435353.5136607683
+Iter:  2  \& Energy:  421416.73136179853
+Iter:  3  \& Energy:  416324.43984678737
+Iter:  4  \& Energy:  412889.85338557087
+Iter:  5  \& Energy:  411002.996657156
+Iter:  6  \& Energy:  410268.32103964617
+Iter:  7  \& Energy:  409870.9451822136
+Iter:  8  \& Energy:  409587.28157724295
+Iter:  9  \& Energy:  409360.3368975232
+Iter:  10  \& Energy:  409218.2293921035
+Iter:  11  \& Energy:  409100.65052645904
+Iter:  12  \& Energy:  409035.2407205957
+Iter:  13  \& Energy:  408971.99855951633
+Iter:  14  \& Energy:  408918.46616139886
+Iter:  15  \& Energy:  408885.6007815107
+Iter:  16  \& Energy:  408860.0990456538
+Iter:  17  \& Energy:  408847.8202893133
+Iter:  18  \& Energy:  408837.60913278285
+Iter:  19  \& Energy:  408825.7661663122
+Iter:  20  \& Energy:  408818.527654588
+Iter:  21  \& Energy:  408813.24382852565
+Iter:  22  \& Energy:  408807.88594092143
+Iter:  23  \& Energy:  408803.4774250088
+Iter:  24  \& Energy:  408801.58770126896
+Iter:  25  \& Energy:  408798.6367895905
+Iter:  26  \& Energy:  408794.21586127364
+Iter:  27  \& Energy:  408791.4390598762
+Iter:  28  \& Energy:  408788.79106831155
+Iter:  29  \& Energy:  408786.9970537205
+Iter:  30  \& Energy:  408785.89995080204
+Iter:  31  \& Energy:  408785.31936322304
+Iter:  32  \& Energy:  408785.08401190036
+Iter:  33  \& Energy:  408784.80169865105
+Iter:  34  \& Energy:  408784.6785890563
+Iter:  35  \& Energy:  408784.29963269277
+Iter:  36  \& Energy:  408783.60515048646
+Iter:  37  \& Energy:  408782.7109854351
+Iter:  38  \& Energy:  408781.22929252905
+Iter:  39  \& Energy:  408779.0832250611
+Iter:  40  \& Energy:  408776.9115618437
+Iter:  41  \& Energy:  408775.9617690922
+Iter:  42  \& Energy:  408773.92375755636
+Iter:  43  \& Energy:  408771.69729569374
+Iter:  44  \& Energy:  408769.478334363
+Iter:  45  \& Energy:  408766.944422556
+Iter:  46  \& Energy:  408765.7016358568
+Iter:  47  \& Energy:  408763.2348312776
+Iter:  48  \& Energy:  408761.6593697846
+Iter:  49  \& Energy:  408758.9402701809
+Iter:  50  \& Energy:  408756.42620111426
+Iter:  51  \& Energy:  408753.4333461075
+Iter:  52  \& Energy:  408751.5329590999
+Iter:  53  \& Energy:  408750.1276669587
+Iter:  54  \& Energy:  408748.60096542776
+Iter:  55  \& Energy:  408746.19307869236
+Iter:  56  \& Energy:  408744.1651067176
+Iter:  57  \& Energy:  408740.75355233945
+Iter:  58  \& Energy:  408734.27083953825
+Iter:  59  \& Energy:  408723.759331248
+Iter:  60  \& Energy:  408709.9767522182
+Iter:  61  \& Energy:  408698.6778302477
+Iter:  62  \& Energy:  408682.36123914004
+Iter:  63  \& Energy:  408666.2817814076
+Iter:  64  \& Energy:  408651.6017917632
+Iter:  65  \& Energy:  408635.43337183504
+Iter:  66  \& Energy:  408619.94043446257
+Iter:  67  \& Energy:  408604.0070365668
+Iter:  68  \& Energy:  408585.56882174395
+Iter:  69  \& Energy:  408574.96485296416
+Iter:  70  \& Energy:  408564.063690689
+Iter:  71  \& Energy:  408544.33654424857
+Iter:  72  \& Energy:  408515.022102769
+Iter:  73  \& Energy:  408488.87362522533
+Iter:  74  \& Energy:  408466.89331840543
+Iter:  75  \& Energy:  408444.7442344371
+Iter:  76  \& Energy:  408411.5817329532
+Iter:  77  \& Energy:  408369.97674737155
+Iter:  78  \& Energy:  408319.4165187494
+Iter:  79  \& Energy:  408248.97555275273
+Iter:  80  \& Energy:  408157.11908535444
+Iter:  81  \& Energy:  408022.135401098
+Iter:  82  \& Energy:  407806.6681820317
+Iter:  83  \& Energy:  407437.6373745418
+Iter:  84  \& Energy:  406962.76025135175
+Iter:  85  \& Energy:  406429.93445692636
+Iter:  86  \& Energy:  405971.60115159996
+Iter:  87  \& Energy:  405607.3603626096
+Iter:  88  \& Energy:  405353.92752955813
+Iter:  89  \& Energy:  405179.7117030071
+Iter:  90  \& Energy:  405047.91435775766
+Iter:  91  \& Energy:  404934.027329193
+Iter:  92  \& Energy:  404835.47782939865
+Iter:  93  \& Energy:  404736.8084199897
+Iter:  94  \& Energy:  404647.94568412943
+Iter:  95  \& Energy:  404584.3083044918
+Iter:  96  \& Energy:  404538.74025206367
+Iter:  97  \& Energy:  404512.86205342395
+Iter:  98  \& Energy:  404493.991104704
+Iter:  99  \& Energy:  404479.68391067965
+Iter:  100  \& Energy:  404465.21434880147
+Iter:  101  \& Energy:  404453.1344142958
+Iter:  102  \& Energy:  404434.61081575986
+Iter:  103  \& Energy:  404421.7504506172
+Iter:  104  \& Energy:  404410.37958203565
+Iter:  105  \& Energy:  404398.4671355112
+Iter:  106  \& Energy:  404385.55707105657
+Iter:  107  \& Energy:  404378.98517144506
+Iter:  108  \& Energy:  404373.02770081995
+Iter:  109  \& Energy:  404370.1765296238
+Iter:  110  \& Energy:  404368.7206963198
+Iter:  111  \& Energy:  404367.4311231186
+Iter:  112  \& Energy:  404366.5440401771
+Iter:  113  \& Energy:  404366.15788515855
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  435254.2938407262
+Iter:  2  \& Energy:  417567.3829882291
+Iter:  3  \& Energy:  409280.31659279566
+Iter:  4  \& Energy:  405133.3841348033
+Iter:  5  \& Energy:  402582.10386770434
+Iter:  6  \& Energy:  401026.6189378817
+Iter:  7  \& Energy:  400207.7963733028
+Iter:  8  \& Energy:  399795.9147393042
+Iter:  9  \& Energy:  399552.64746705664
+Iter:  10  \& Energy:  399416.3135800789
+Iter:  11  \& Energy:  399305.9142934744
+Iter:  12  \& Energy:  399189.1715944581
+Iter:  13  \& Energy:  399081.94865815906
+Iter:  14  \& Energy:  399006.2679102212
+Iter:  15  \& Energy:  398929.50741755246
+Iter:  16  \& Energy:  398849.4682366529
+Iter:  17  \& Energy:  398775.19058541243
+Iter:  18  \& Energy:  398677.2218882676
+Iter:  19  \& Energy:  398569.864685256
+Iter:  20  \& Energy:  398476.6827148266
+Iter:  21  \& Energy:  398430.6747422861
+Iter:  22  \& Energy:  398372.6808863982
+Iter:  23  \& Energy:  398325.86835893145
+Iter:  24  \& Energy:  398291.1620323096
+Iter:  25  \& Energy:  398248.310659186
+Iter:  26  \& Energy:  398214.2598737541
+Iter:  27  \& Energy:  398196.76948410587
+Iter:  28  \& Energy:  398179.21957830095
+Iter:  29  \& Energy:  398158.81319830375
+Iter:  30  \& Energy:  398141.3761107723
+Iter:  31  \& Energy:  398126.0906984229
+Iter:  32  \& Energy:  398110.57573174837
+Iter:  33  \& Energy:  398098.18315663264
+Iter:  34  \& Energy:  398084.61483802
+Iter:  35  \& Energy:  398067.4798506326
+Iter:  36  \& Energy:  398058.14781728695
+Iter:  37  \& Energy:  398049.958900537
+Iter:  38  \& Energy:  398044.9939086398
+Iter:  39  \& Energy:  398040.90057572885
+Iter:  40  \& Energy:  398038.2078164279
+Iter:  41  \& Energy:  398036.34854380874
+Iter:  42  \& Energy:  398035.55237764167
+Iter:  43  \& Energy:  398035.0265375434
+Iter:  44  \& Energy:  398034.39529870177
+Iter:  45  \& Energy:  398033.9654092028
+Iter:  46  \& Energy:  398033.73263118777
+Iter:  47  \& Energy:  398033.6269752825
+Iter:  48  \& Energy:  398033.42728179926
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{k\PYZus{}means}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter:  1  \& Energy:  414926.41958721884
+Iter:  2  \& Energy:  400704.1492578523
+Iter:  3  \& Energy:  396418.15073701565
+Iter:  4  \& Energy:  394834.9146623979
+Iter:  5  \& Energy:  394240.5191531714
+Iter:  6  \& Energy:  393958.30335304205
+Iter:  7  \& Energy:  393806.06708153273
+Iter:  8  \& Energy:  393702.1317819628
+Iter:  9  \& Energy:  393632.73039570544
+Iter:  10  \& Energy:  393561.69299367775
+Iter:  11  \& Energy:  393488.86455910874
+Iter:  12  \& Energy:  393405.0391005762
+Iter:  13  \& Energy:  393330.9303187796
+Iter:  14  \& Energy:  393254.3062498745
+Iter:  15  \& Energy:  393198.83931796224
+Iter:  16  \& Energy:  393168.174602458
+Iter:  17  \& Energy:  393142.0512975813
+Iter:  18  \& Energy:  393124.0924257433
+Iter:  19  \& Energy:  393113.11100499326
+Iter:  20  \& Energy:  393103.8578557945
+Iter:  21  \& Energy:  393092.3789304392
+Iter:  22  \& Energy:  393079.8420527198
+Iter:  23  \& Energy:  393069.14346800256
+Iter:  24  \& Energy:  393061.26345311996
+Iter:  25  \& Energy:  393055.21803359553
+Iter:  26  \& Energy:  393051.59542185516
+Iter:  27  \& Energy:  393047.868539233
+Iter:  28  \& Energy:  393046.1044569399
+Iter:  29  \& Energy:  393044.3902525685
+Iter:  30  \& Energy:  393042.3063495353
+Iter:  31  \& Energy:  393038.9733463976
+Iter:  32  \& Energy:  393035.682935363
+Iter:  33  \& Energy:  393033.8506278274
+Iter:  34  \& Energy:  393032.6401998789
+Iter:  35  \& Energy:  393031.8662295271
+Iter:  36  \& Energy:  393031.38854988833
+Iter:  37  \& Energy:  393031.0949284747
+Iter:  38  \& Energy:  393030.95726803143
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+accuracy:  51.61
+
+    \end{Verbatim}
+
+    More and more k, the final energy is lower. But the result is
+disappointing. About this result(accuracy is 51.61), I think that the
+initial value is important and recognizing image is very hard. Maybe I
+need some other solution for this.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
