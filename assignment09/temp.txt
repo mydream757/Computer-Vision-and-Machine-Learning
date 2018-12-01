@@ -1,0 +1,24 @@
+#plot the result
+plt.figure()
+for i in range(4):
+    experiment_average_test[i, :] /= experiment_count_test[i]
+    title = ['TP','FP','FN','TN']
+    plt.subplot(1, 4, i+1)
+    plt.title(title[i])
+    plt.imshow(experiment_average_test[i,:].reshape((size_row, size_col)), cmap='Greys', interpolation='None')
+
+    frame   = plt.gca()
+    frame.axes.get_xaxis().set_visible(False)
+    frame.axes.get_yaxis().set_visible(False)
+
+    print(title[i],': ',experiment_count_test[i])
+table = imread('Eval_table.png')
+plt.figure()
+plt.imshow(table)
+plt.show()
+#print the evaluation
+print('Error rate: ',(experiment_count_test[1]+experiment_count_test[2])*100/num_test,'%')
+print('Precision: ', experiment_count_test[0]*100/(experiment_count_test[0]+experiment_count_test[1]),'%')
+print('Recall: ',experiment_count_test[0]*100/(experiment_count_test[0]+experiment_count_test[2]),'%')
+print('False positive rate: ',experiment_count_test[1]*100/(experiment_count_test[1]+experiment_count_test[3]),'%')
+print('Accuracy: ', (experiment_count_test[0]+experiment_count_test[3])*100/num_test,'%')
